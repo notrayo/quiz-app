@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 //import 'package:quiz_app/screens/quiz1.dart';
-import 'package:quiz_app/widgets/gradient.dart';
+// import 'package:quiz_app/widgets/gradient.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key, required this.startQuiz});
