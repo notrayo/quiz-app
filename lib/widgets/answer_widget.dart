@@ -13,7 +13,7 @@ class JibuButtonWidget extends StatelessWidget {
       onPressed: buttonOnPressed,
       style: ElevatedButton.styleFrom(
           backgroundColor: const Color.fromARGB(255, 26, 8, 114),
-          padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 18),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
       child: Text(jibuOption),

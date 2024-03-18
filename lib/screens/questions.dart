@@ -12,44 +12,51 @@ class QuestionsScreen extends StatefulWidget {
   State<QuestionsScreen> createState() => _QuestionsScreenState();
 }
 
-final currentSwali = questions[0];
-
 class _QuestionsScreenState extends State<QuestionsScreen> {
+  // logic for changing question
+
+  var currentSwaliIndex = 0;
+
+  void answerSwali() {
+    // currentSwaliIndex = currentSwaliIndex + 1;
+    //currentSwaliIndex += 1;
+    // currentSwaliIndex++;
+
+    setState(() {
+      currentSwaliIndex += 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final currentSwali = questions[currentSwaliIndex];
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // const SizedBox(
-          //   height: 60,
-          // ),
-          SwaliWidget(swaliText: currentSwali.swali),
-          const SizedBox(
-            height: 50,
-          ),
-          JibuButtonWidget(
-              jibuOption: currentSwali.majibu[0], buttonOnPressed: () {}),
-          const SizedBox(
-            height: 25,
-          ),
-          JibuButtonWidget(
-              jibuOption: currentSwali.majibu[1], buttonOnPressed: () {}),
-          const SizedBox(
-            height: 25,
-          ),
-          JibuButtonWidget(
-              jibuOption: currentSwali.majibu[2], buttonOnPressed: () {}),
-          const SizedBox(
-            height: 25,
-          ),
-          JibuButtonWidget(
-              jibuOption: currentSwali.majibu[3], buttonOnPressed: () {}),
-          // const SizedBox(height: 25),
-          // JibuButtonWidget(
-          //     jibuOption: currentSwali.majibu[4], buttonOnPressed: () {})
-        ],
+      child: Container(
+        margin: const EdgeInsets.all(30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SwaliWidget(swaliText: currentSwali.swali),
+
+            const SizedBox(
+              height: 30,
+            ),
+            // using a map to automatically create the question widgets
+            ...currentSwali.getShuffledMajibu().map((e) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  JibuButtonWidget(jibuOption: e, buttonOnPressed: answerSwali),
+                  const SizedBox(
+                    height: 25,
+                  )
+                ],
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
