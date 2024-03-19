@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/data/maswali_data.dart';
 import 'package:quiz_app/models/maswali_model.dart';
 import 'package:quiz_app/screens/questions.dart';
+import 'package:quiz_app/screens/results.dart';
 
 import '../widgets/gradient.dart';
 import 'home.dart';
@@ -44,9 +45,18 @@ class _quizState extends State<quiz> {
     if (selectedAnswers.length == questions.length) {
       setState(() {
         selectedAnswers = [];
-        activeScreen = HomeScreen(startQuiz: switchScreen);
+        //activeScreen = HomeScreen(startQuiz: switchScreen);
+        activeScreen = ResultsScreen(onRestartQuiz: restartQuiz);
       });
     }
+  }
+
+  //restart quiz
+
+  void restartQuiz() {
+    setState(() {
+      activeScreen = QuestionsScreen(onChosenAnswer: chooseAnswer);
+    });
   }
 
   @override
