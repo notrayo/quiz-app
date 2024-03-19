@@ -16,7 +16,7 @@ class JibuButtonWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 18),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
-      child: Text(jibuOption),
+      child: Align(alignment: Alignment.centerLeft, child: Text(jibuOption)),
     );
   }
 }

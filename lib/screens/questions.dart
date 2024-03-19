@@ -6,7 +6,9 @@ import 'package:quiz_app/widgets/question_widget.dart';
 import '../data/maswali_data.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({super.key, required this.onChosenAnswer});
+
+  final void Function(String answer) onChosenAnswer;
 
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
@@ -17,10 +19,12 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   var currentSwaliIndex = 0;
 
-  void answerSwali() {
+  void answerSwali(String selectedAnswer) {
     // currentSwaliIndex = currentSwaliIndex + 1;
     //currentSwaliIndex += 1;
     // currentSwaliIndex++;
+
+    widget.onChosenAnswer(selectedAnswer);
 
     setState(() {
       currentSwaliIndex += 1;
@@ -48,7 +52,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  JibuButtonWidget(jibuOption: e, buttonOnPressed: answerSwali),
+                  JibuButtonWidget(
+                      jibuOption: e,
+                      buttonOnPressed: () {
+                        answerSwali(e);
+                      }),
                   const SizedBox(
                     height: 25,
                   )

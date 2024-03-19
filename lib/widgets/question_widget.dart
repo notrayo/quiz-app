@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SwaliWidget extends StatelessWidget {
   const SwaliWidget({super.key, required this.swaliText});
@@ -9,11 +10,9 @@ class SwaliWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       swaliText,
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
-      ),
+      style: GoogleFonts.lato(
+          color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
     );
+    //
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/data/maswali_data.dart';
+import 'package:quiz_app/models/maswali_model.dart';
 import 'package:quiz_app/screens/questions.dart';
 
 import '../widgets/gradient.dart';
@@ -16,6 +18,9 @@ class _quizState extends State<quiz> {
 
   late Widget activeScreen;
 
+  //logic for answered questions
+  List<String> selectedAnswers = [];
+
   @override
   void initState() {
     activeScreen = HomeScreen(
@@ -27,8 +32,21 @@ class _quizState extends State<quiz> {
 
   void switchScreen() {
     setState(() {
-      activeScreen = const QuestionsScreen();
+      activeScreen = QuestionsScreen(
+        onChosenAnswer: chooseAnswer,
+      );
     });
+  }
+
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+    //making sure the sum of answers match the sum of questions
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        selectedAnswers = [];
+        activeScreen = HomeScreen(startQuiz: switchScreen);
+      });
+    }
   }
 
   @override
