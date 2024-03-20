@@ -44,9 +44,13 @@ class _quizState extends State<quiz> {
     //making sure the sum of answers match the sum of questions
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        selectedAnswers = [];
         //activeScreen = HomeScreen(startQuiz: switchScreen);
-        activeScreen = ResultsScreen(onRestartQuiz: restartQuiz);
+        activeScreen = ResultsScreen(
+          onRestartQuiz: restartQuiz,
+          selectedAnswerz: selectedAnswers,
+        );
+
+        selectedAnswers = [];
       });
     }
   }
