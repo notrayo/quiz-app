@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/maswali_data.dart';
+import 'package:quiz_app/widgets/answers_summary.dart';
 import '../screens/quiz.dart';
 
 class ResultsScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class ResultsScreen extends StatelessWidget {
     for (var i = 0; i < selectedAnswerz.length; i++) {
       summary.add({
         'question_index': i,
-        'question': questions[i],
+        'question': questions[i].swali,
         'correct_answer': questions[i].majibu[0],
         'selected_answer': selectedAnswerz[i],
         'no_of_questions': selectedAnswerz.length
@@ -31,6 +32,13 @@ class ResultsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final summaryData = getSummaryDataOfAnswers();
 
+    final numTotalQuestions = selectedAnswerz.length;
+    final numCorrectQuestions = summaryData.where(
+      (element) {
+        return element['selected_answer'] == element['correct_answer'];
+      },
+    ).length;
+
     return SizedBox(
       width: double.infinity,
       child: Container(
@@ -39,11 +47,11 @@ class ResultsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-                'You answered X out of ${selectedAnswerz.length} questions correctly'),
+                'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly'),
             const SizedBox(
               height: 30,
             ),
-            const Text('Answers displayed here'),
+            AnswersSummary(summaryData: summaryData),
             const SizedBox(
               height: 30,
             ),
